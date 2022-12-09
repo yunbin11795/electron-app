@@ -3,10 +3,11 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 11:47:53
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-11-24 15:36:37
+ * @LastEditTime: 2022-12-09 16:35:07
  * @FilePath: \electron-app\src\preload\ipcRenderer.ts
  */
 import { ipcRenderer, IpcRenderer,IpcRendererEvent }  from 'electron'
+
 
 export interface IpcRendererType{
   test: (title:string)=>void,

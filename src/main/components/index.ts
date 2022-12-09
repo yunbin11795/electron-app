@@ -1,16 +1,19 @@
+
 /*
  * @Description: 
  * @Author: Chen YunBin
  * @Date: 2022-12-09 15:29:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-12-09 15:43:08
+ * @LastEditTime: 2022-12-09 16:54:32
  * @FilePath: \electron-app\src\main\components\index.ts
  */
 
-import { setTheme } from './theme'
-import {MyTray} from './tray'
+import { initTheme}  from './theme'
+import { MyTray } from './tray'
 
-export default (mainWindow)=>{
-  setTheme()
+export const initComponents = (mainWindow)=>{
+  initTheme()
   new MyTray(mainWindow)
 }
+
+

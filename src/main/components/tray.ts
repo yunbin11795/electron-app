@@ -3,10 +3,10 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-11-25 17:55:17
- * @FilePath: \electron-app\src\main\tray.ts
+ * @LastEditTime: 2022-12-09 17:08:26
+ * @FilePath: \electron-app\src\main\components\tray.ts
  */
-import { Menu, Tray, ipcMain ,nativeImage ,app} from 'electron'
+import { Menu, Tray, ipcMain ,nativeImage ,app } from 'electron'
 import * as path from 'path'
 import { BrowserWindow } from 'electron'
 
@@ -67,9 +67,8 @@ export class MyTray{
       this.tray.setImage(this.image);
     }
 
-      // 图标闪烁
+    // 图标闪烁
     startFlash():void {
-    // 托盘闪烁
       let count = 0;
       this.timer = setInterval(() => {
         try {

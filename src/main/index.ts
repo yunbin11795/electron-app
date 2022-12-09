@@ -3,16 +3,15 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-12-09 15:44:02
+ * @LastEditTime: 2022-12-09 18:19:10
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow} from 'electron'
 import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import ipcMain from '../preload/ipcMain'
-
-
-import initComponents from './components/index'
+import {initComponents} from './components/index'
+import autoUpdater from './autoUpdater'
 
 function createWindow(): void {
   // Create the browser window.
@@ -81,6 +80,11 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+  
+  if (process.env.NODE_ENV === 'production') {
+    autoUpdater.checkForUpdates()
+  }
+  
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
