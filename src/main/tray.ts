@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-11-25 17:18:06
+ * @LastEditTime: 2022-11-25 17:55:17
  * @FilePath: \electron-app\src\main\tray.ts
  */
 import { Menu, Tray, ipcMain ,nativeImage ,app} from 'electron'
@@ -31,7 +31,7 @@ export class MyTray{
         { label: 'Item2', type: 'separator' },
         { label: 'Item3', type: 'checkbox', checked: true },
         { label: 'close', type: 'normal' ,click: ()=>{
-          app.quit()
+          app.exit()
         } }
       ])
 
