@@ -3,15 +3,16 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-11-25 17:17:41
+ * @LastEditTime: 2022-12-09 15:44:02
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow} from 'electron'
 import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import ipcMain from '../preload/ipcMain'
-import { setTheme } from './theme'
-import {MyTray} from './tray'
+
+
+import initComponents from './components/index'
 
 function createWindow(): void {
   // Create the browser window.
@@ -27,17 +28,19 @@ function createWindow(): void {
     }
   })
 
+  ipcMain(mainWindow)
+  initComponents(mainWindow)
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
-
+  
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
-  ipcMain(mainWindow)
-  setTheme()
-  new MyTray(mainWindow)
+
+
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
