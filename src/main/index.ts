@@ -3,21 +3,20 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-12-09 18:19:10
+ * @LastEditTime: 2023-01-29 12:04:26
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow} from 'electron'
 import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import ipcMain from '../preload/ipcMain'
 import {initComponents} from './components/index'
 import autoUpdater from './autoUpdater'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1000,
+    height: 650,
     show: true,
     autoHideMenuBar: true,
     icon:path.join(__dirname, '/tray.png'),
@@ -27,7 +26,6 @@ function createWindow(): void {
     }
   })
 
-  ipcMain(mainWindow)
   initComponents(mainWindow)
 
   mainWindow.on('ready-to-show', () => {

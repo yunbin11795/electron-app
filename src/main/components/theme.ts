@@ -3,24 +3,57 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-22 10:34:02
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-12-09 17:08:21
+ * @LastEditTime: 2023-01-29 12:03:51
  * @FilePath: \electron-app\src\main\components\theme.ts
  */
-import {nativeTheme,ipcMain  } from 'electron'
+import {nativeTheme, ipcMain, ipcRenderer ,BrowserWindow, dialog} from 'electron'
 
-export const initTheme = ():void=>{
+export const ThemeIpcRenderer = {
+  toggle: () => ipcRenderer.invoke('dark-mode:toggle'),
+  system: () => ipcRenderer.invoke('dark-mode:system'),
+  test: (title:string)=> ipcRenderer.send('test',title),
+  openFile: ()=> ipcRenderer.invoke('dialog:openFile'),
+}
+
+export default class Theme {
+   constructor(mainWindow){
+      this.mainWindow = mainWindow
+      this.handleEvent()
+   }
+
+   mainWindow: BrowserWindow
+   handleEvent():void {
+    ipcMain.handle('dark-mode:toggle', () => {
+      if (nativeTheme.shouldUseDarkColors) {
+        nativeTheme.themeSource = 'light'
+      } else {
+        nativeTheme.themeSource = 'dark'
+      }
+      return nativeTheme.shouldUseDarkColors
+    })
+    
+    ipcMain.handle('dark-mode:system', () => {
+      nativeTheme.themeSource = 'system'
+    })
+
+    ipcMain.on('test', this.handleTest)
+    ipcMain.handle('dialog:openFile',()=>{ return this.handleOpenFile(this.mainWindow) })
+   }
+
+  handleTest(event, title):void{
+    const webContents = event.sender
+    const win = BrowserWindow.fromWebContents(webContents)
+    win?win.setTitle(title):''
+  }
   
-  ipcMain.handle('dark-mode:toggle', () => {
-    if (nativeTheme.shouldUseDarkColors) {
-      nativeTheme.themeSource = 'light'
+  async handleOpenFile  (mainWindow):Promise<string>  {
+    const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow)
+    if (canceled) {
+      return ''
     } else {
-      nativeTheme.themeSource = 'dark'
+      return filePaths[0]
     }
-    return nativeTheme.shouldUseDarkColors
-  })
-  
-  ipcMain.handle('dark-mode:system', () => {
-    nativeTheme.themeSource = 'system'
-  })
+  }
   
 }
+

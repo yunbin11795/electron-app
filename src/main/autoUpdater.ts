@@ -3,14 +3,14 @@
  * @Author: Chen YunBin
  * @Date: 2022-12-09 18:05:32
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-12-09 18:27:23
+ * @LastEditTime: 2023-01-29 09:43:00
  * @FilePath: \electron-app\src\main\autoUpdater.ts
  */
 
 import { dialog } from 'electron'
 import { autoUpdater } from 'electron-updater'
 
-autoUpdater.setFeedURL();
+// autoUpdater.setFeedURL();
 autoUpdater.on('update-downloaded', () => {
   if (process.env.NODE_ENV === 'production') {
       dialog.showMessageBox({

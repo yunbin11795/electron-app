@@ -3,14 +3,19 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-12-09 17:08:26
- * @FilePath: \electron-app\src\main\components\tray.ts
+ * @LastEditTime: 2023-01-29 11:52:19
+ * @FilePath: \electron-app\src\main\components\MyTray.ts
  */
-import { Menu, Tray, ipcMain ,nativeImage ,app } from 'electron'
+import { Menu, Tray, ipcMain ,nativeImage ,app , ipcRenderer} from 'electron'
 import * as path from 'path'
 import { BrowserWindow } from 'electron'
 
-export class MyTray{
+export const MyTrayIpcRenderer = {
+  startFlash:() => ipcRenderer.send('startFlash'),
+  stopFlash: ()=> ipcRenderer.send('stopFlash')
+}
+
+export default class MyTray{
 
     constructor(mainWindow){
       this.mainWindow = mainWindow
