@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 10:55:23
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 17:22:44
+ * @LastEditTime: 2023-01-30 11:31:16
  * @FilePath: \electron-app\src\main\components\BrowserViewList.ts
  */
 
@@ -20,10 +20,10 @@ export default class BrowserViewList {
     mainWindow: BrowserWindow
     viewList:any = []
     bounds = {
-      x:280,
-      y:100,
-      width:700,
-      height: 500
+      x:270,
+      y:70,
+      offsetX: 16,
+      offsetY: 39
     }
     constructor(mainWindow){
       this.mainWindow = mainWindow
@@ -33,14 +33,22 @@ export default class BrowserViewList {
     addBrowserView(item):void {
        const view = new BrowserView({
         webPreferences: {
-          preload: path.join(__dirname, '../renderer/script/BrowserViewList.js'),
+          preload: path.join(__dirname, './script/BrowserViewList.js'),
         }
        })
        this.mainWindow.addBrowserView(view)
-       view.setBounds(this.bounds)
-       view.setAutoResize({width:true, height: true})
        view.webContents.loadURL(item.url)
 
+       const winBounds = this.mainWindow.getSize()
+
+       view.setBounds({
+          x: this.bounds.x,
+          y: this.bounds.y,
+          width: winBounds[0] - this.bounds.offsetX - this.bounds.x,
+          height: winBounds[1]- this.bounds.offsetY  - this.bounds.y
+       })
+
+       view.setAutoResize({width:true, height: true})
        this.viewList.push({
          id:item.id,
          view:view
@@ -48,13 +56,19 @@ export default class BrowserViewList {
     }
 
     showBrowserView(view:BrowserView){
-      view.setBounds(this.bounds)
+      const winBounds = this.mainWindow.getSize()
+      view.setBounds({
+        x: this.bounds.x,
+        y: this.bounds.y,
+        width: winBounds[0] - this.bounds.offsetX - this.bounds.x,
+        height: winBounds[1]- this.bounds.offsetY  - this.bounds.y
+      })
     }
 
     hideBrowserView(view:BrowserView){
       view.setBounds({
-        x:280,
-        y:100,
+        x:this.bounds.x,
+        y:this.bounds.y,
         width:0,
         height: 0
       })

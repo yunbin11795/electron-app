@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 12:04:26
+ * @LastEditTime: 2023-01-30 14:17:04
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow} from 'electron'
@@ -19,6 +19,7 @@ function createWindow(): void {
     height: 650,
     show: true,
     autoHideMenuBar: true,
+    useContentSize: true,
     icon:path.join(__dirname, '/tray.png'),
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
@@ -54,8 +55,6 @@ function createWindow(): void {
     mainWindow.setSkipTaskbar(true);
 
   });
-
-  
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

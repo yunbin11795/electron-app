@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-25 16:56:40
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 17:35:32
+ * @LastEditTime: 2023-01-30 11:20:29
  * @FilePath: \electron-app\src\renderer\src\views\dashboard\index.vue
 -->
 <template>
@@ -25,12 +25,12 @@
 
 <script setup lang="ts">
  import MessageList from "./components/MessageList.vue"
- import { reactive } from 'vue'
+ import { ref } from 'vue'
  import { Close } from '@element-plus/icons-vue'
  
- let list:any = reactive([])
+ let list:any = ref([])
  const handleAdd = (item)=>{
-    list.push(item)
+    list.value.push(item)
  }
  const handClickTab = (item)=>{
    window.ipcRenderer.clickBrowserView(item.id)
@@ -38,7 +38,7 @@
 
  const handleClose = (item)=>{
   window.ipcRenderer.delBrowserView(item.id)
-  list = list.filter( o => o.id !== item.id)
+  list.value = list.value.filter( o => o.id !== item.id)
  }
 
 </script>
@@ -46,6 +46,7 @@
 <style lang="scss">
 .dashboard-container{
   display: flex;
+  padding-left: 10px;
 }
 img{
   width: 30px;
