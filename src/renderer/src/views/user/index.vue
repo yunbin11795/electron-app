@@ -3,11 +3,12 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 09:44:41
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 10:19:13
+ * @LastEditTime: 2023-01-30 16:32:33
  * @FilePath: \electron-app\src\renderer\src\views\user\index.vue
 -->
 <template>
   <div class="login">
+    <Versions/>
     <el-form
       :label-position="labelPosition"
       label-width="100px"
@@ -28,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import Versions from '@renderer/components/Versions.vue'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router';
 

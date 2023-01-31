@@ -7,6 +7,7 @@
     "src/preload/*.d.ts"
 , "public/script"  ],
   "compilerOptions": {
+    "types": [ "vite/client" ],
     "composite": true,
     "baseUrl": ".",
     "paths": {

@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 11:52:19
+ * @LastEditTime: 2023-01-31 16:03:54
  * @FilePath: \electron-app\src\main\components\MyTray.ts
  */
 import { Menu, Tray, ipcMain ,nativeImage ,app , ipcRenderer} from 'electron'

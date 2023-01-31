@@ -3,14 +3,14 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-30 14:17:04
+ * @LastEditTime: 2023-01-31 16:57:31
  * @FilePath: \electron-app\src\main\index.ts
  */
-import { app, shell, BrowserWindow} from 'electron'
+import { app, shell, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import {initComponents} from './components/index'
-import autoUpdater from './autoUpdater'
+import AppUpdater from './autoUpdater'
 
 function createWindow(): void {
   // Create the browser window.
@@ -61,7 +61,7 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId(process.execPath)
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -77,11 +77,9 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-  
-  if (process.env.NODE_ENV === 'production') {
-    autoUpdater.checkForUpdates()
+  if (import.meta.env.MODE === 'production') {
+    new AppUpdater()
   }
-  
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

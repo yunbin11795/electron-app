@@ -3,11 +3,11 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-25 16:40:18
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 10:17:56
+ * @LastEditTime: 2023-01-30 15:37:58
  * @FilePath: \electron-app\src\renderer\src\router\index.ts
  */
 
-import {createRouter,createWebHistory} from 'vue-router'
+import {createRouter,createWebHashHistory} from 'vue-router'
 
 const routes = [
   {
@@ -23,6 +23,6 @@ const routes = [
 ]
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes, // `routes: routes` 的缩写
 })

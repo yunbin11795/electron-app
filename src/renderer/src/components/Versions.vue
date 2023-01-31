@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-11-25 15:41:19
+ * @LastEditTime: 2023-01-31 11:41:35
  * @FilePath: \electron-app\src\renderer\src\components\Versions.vue
 -->
 
@@ -59,16 +59,15 @@ const stop = ():void =>{
 }
 
 const test = ():void => {
-  console.log(Push.Permission.has())
-  Push.create("Hello world!", {
-    body: "How's it hangin'?",
-    timeout: 4000,
-    tag: 'foo',
-    onClick: function () {
-        window.focus();
-        Push.close('foo');
-    }
-});
-
+    console.log(Push.Permission.has())
+      Push.create("Hello world!", {
+        body: "How's it hangin'?",
+        timeout: 4000,
+        tag: 'foo',
+        onClick: function () {
+            window.focus();
+            Push.close('foo');
+        }
+    });
 }
 </script>
