@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-31 16:57:31
+ * @LastEditTime: 2023-01-31 18:27:18
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow } from 'electron'
@@ -55,13 +55,14 @@ function createWindow(): void {
     mainWindow.setSkipTaskbar(true);
 
   });
+  // mainWindow.webContents.openDevTools()
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId(process.execPath)
+  electronApp.setAppUserModelId('com.electron.app')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

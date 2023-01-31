@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 10:55:23
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-30 11:31:16
+ * @LastEditTime: 2023-01-31 17:54:57
  * @FilePath: \electron-app\src\main\components\BrowserViewList.ts
  */
 
@@ -38,7 +38,10 @@ export default class BrowserViewList {
        })
        this.mainWindow.addBrowserView(view)
        view.webContents.loadURL(item.url)
-
+       view.webContents.setWindowOpenHandler(details =>{
+          view.webContents.loadURL(details.url)
+          return {action: 'deny'}
+       })
        const winBounds = this.mainWindow.getSize()
 
        view.setBounds({

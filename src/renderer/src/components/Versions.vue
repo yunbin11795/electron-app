@@ -68,6 +68,6 @@ const test = ():void => {
             window.focus();
             Push.close('foo');
         }
-    });
+      });
 }
 </script>
