@@ -1,4 +1,3 @@
 provider: generic
 url: http://127.0.0.1:5500/dist
 updaterCacheDirName: electron-app-updater
-useMultipleRangeRequest: false
