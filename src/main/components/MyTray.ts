@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-01 10:45:36
+ * @LastEditTime: 2023-02-01 14:36:06
  * @FilePath: \electron-app\src\main\components\MyTray.ts
  */
 import { Menu, Tray, ipcMain ,nativeImage ,app , ipcRenderer} from 'electron'
@@ -26,7 +26,7 @@ export default class MyTray{
     }
 
     mainWindow: BrowserWindow
-    image = path.join(__dirname, '../../public/tray.png')
+    image = path.join(__dirname, '../../public/icon.png')
     normalImage = nativeImage.createFromPath('')
     tray:Tray
     timer: any

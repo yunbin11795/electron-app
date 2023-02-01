@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-01 10:46:08
+ * @LastEditTime: 2023-02-01 15:24:28
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow } from 'electron'
@@ -20,7 +20,7 @@ function createWindow(): void {
     show: true,
     autoHideMenuBar: true,
     useContentSize: true,
-    icon:path.join(__dirname, '../../public/tray.png'),
+    icon:path.join(__dirname, '../../public/icon.png'),
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       sandbox: false,
