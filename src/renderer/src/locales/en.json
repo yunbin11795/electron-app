@@ -1,0 +1,8 @@
+{
+  "chinese": "Chinese",
+  "english": "English",
+  "login": {
+    "password": "password",
+    "account": "account"
+  }
+}
