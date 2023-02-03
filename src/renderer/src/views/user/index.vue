@@ -3,13 +3,12 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 09:44:41
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-03 11:55:56
+ * @LastEditTime: 2023-02-03 16:57:26
  * @FilePath: \electron-app\src\renderer\src\views\user\index.vue
 -->
 <template>
   <div class="login">
     <LangSelect/>
-    <i class="iconfont icon-tuichu"></i>
     <el-form
       :label-position="labelPosition"
       label-width="100px"
@@ -17,10 +16,10 @@
       style="max-width: 460px"
 
     >
-      <el-form-item :label="t('login.account')">
-        <el-input v-model="formLabelAlign.account" />
+      <el-form-item :label="$t('login.account')">
+        <el-input v-model="formLabelAlign.email" />
       </el-form-item>
-      <el-form-item :label="t('login.password')">
+      <el-form-item :label="$t('login.password')">
         <el-input v-model="formLabelAlign.password"  type="password" />
       </el-form-item>
 
@@ -33,20 +32,22 @@
 import LangSelect from '@renderer/components/LangSelect/index.vue'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
+import { Login } from '@renderer/api/user'
 
 
 const labelPosition = ref('right')
 const router = useRouter();
 const formLabelAlign = reactive({
-  account: 'test',
+  email: 'test',
   password: '123456',
 })
 
 const login = ()=>{
-  router.push({ name: 'Dashboard' })
+  Login(formLabelAlign).then((res:any) =>{
+    if (!res.errcode) {
+      router.push({ name: 'Dashboard' })
+    }
+  })
 }
 </script>
 

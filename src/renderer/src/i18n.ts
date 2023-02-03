@@ -43,6 +43,7 @@ export function getLanguage() {
 const i18n = createI18n({
   legacy: false, // you must set `false`, to use Composition API
   locale: getLanguage(),
+  globalInjection:true, // 全域注入，让你在 <template> 可以使用 $t
   messages,
   fallbackLocale: 'en', // 设置备用语言
 })

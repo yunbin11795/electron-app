@@ -3,8 +3,8 @@
  * @Author: Chen YunBin
  * @Date: 2023-02-02 12:17:25
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-02 16:55:21
- * @FilePath: \electron-app\src\renderer\src\components\langSelect\index.vue
+ * @LastEditTime: 2023-02-03 17:00:19
+ * @FilePath: \electron-app\src\renderer\src\components\LangSelect\index.vue
 -->
 <template>
   <el-dropdown trigger="click" @command="handleSetLanguage">
@@ -16,10 +16,10 @@
     <template #dropdown >
       <el-dropdown-menu>
         <el-dropdown-item :disabled="language==='zh-CN'" command="zh-CN">
-          {{ t('chinese') }}
+          {{ $t('chinese') }}
         </el-dropdown-item>
         <el-dropdown-item :disabled="language==='en'" command="en">
-          {{ t('english') }}
+          {{ $t('english') }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -35,7 +35,7 @@
 
  const store = userStore()
  const {language} = storeToRefs(store)
- const { t ,locale } = useI18n()
+ const { locale } = useI18n()
 
 
  const handleSetLanguage =(lang)=>{

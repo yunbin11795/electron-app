@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-31 11:41:35
+ * @LastEditTime: 2023-02-03 14:16:35
  * @FilePath: \electron-app\src\renderer\src\components\Versions.vue
 -->
 
@@ -28,6 +28,7 @@
     <a download href="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F2018-06-27%2F5b3345789ca2c.jpg&refer=http%3A%2F%2Fpic1.win4000.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1671935616&t=3f6b0733a1a4bc73b30b013265eae4fc">
       下载
     </a>
+    <i class="iconfont icon-tuichu"></i>
   </div>
 </template>
 
