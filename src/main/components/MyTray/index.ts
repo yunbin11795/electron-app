@@ -3,13 +3,12 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-01 14:36:06
- * @FilePath: \electron-app\src\main\components\MyTray.ts
+ * @LastEditTime: 2023-02-03 11:01:00
+ * @FilePath: \electron-app\src\main\components\MyTray\index.ts
  */
 import { Menu, Tray, ipcMain ,nativeImage ,app , ipcRenderer} from 'electron'
-import * as path from 'path'
 import { BrowserWindow } from 'electron'
-
+import icon from '../../../../resources/icon.png?asset'
 
 export const MyTrayIpcRenderer = {
   startFlash:() => ipcRenderer.send('startFlash'),
@@ -26,7 +25,7 @@ export default class MyTray{
     }
 
     mainWindow: BrowserWindow
-    image = path.join(__dirname, '../../public/icon.png')
+    image = icon
     normalImage = nativeImage.createFromPath('')
     tray:Tray
     timer: any

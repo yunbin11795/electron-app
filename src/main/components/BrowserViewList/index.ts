@@ -3,13 +3,13 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 10:55:23
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-01 10:46:22
- * @FilePath: \electron-app\src\main\components\BrowserViewList.ts
+ * @LastEditTime: 2023-02-03 11:01:25
+ * @FilePath: \electron-app\src\main\components\BrowserViewList\index.ts
  */
 
 import { BrowserWindow , BrowserView ,ipcMain , ipcRenderer} from 'electron'
-import * as path from 'path'
 
+import script from './BrowserViewList.js?asset'
 export const BrowserViewIpcRenderer = {
   addBrowserView: (item)=> ipcRenderer.send('addBrowserView', item),
   clickBrowserView: (id)=> ipcRenderer.send('clickBrowserView', id),
@@ -33,7 +33,7 @@ export default class BrowserViewList {
     addBrowserView(item):void {
        const view = new BrowserView({
         webPreferences: {
-          preload: path.join(__dirname, '../../public/script/BrowserViewList.js'),
+          preload: script
         }
        })
        this.mainWindow.addBrowserView(view)

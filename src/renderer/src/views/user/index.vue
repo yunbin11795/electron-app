@@ -3,12 +3,13 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 09:44:41
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-02 17:16:14
+ * @LastEditTime: 2023-02-03 11:55:56
  * @FilePath: \electron-app\src\renderer\src\views\user\index.vue
 -->
 <template>
   <div class="login">
     <LangSelect/>
+    <i class="iconfont icon-tuichu"></i>
     <el-form
       :label-position="labelPosition"
       label-width="100px"

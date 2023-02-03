@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2022-11-25 15:54:21
+ * @LastEditTime: 2023-02-03 10:22:24
  * @FilePath: \electron-app\electron.vite.config.ts
  */
 import { resolve } from 'path'

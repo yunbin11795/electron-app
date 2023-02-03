@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-01 15:24:28
+ * @LastEditTime: 2023-02-03 10:26:59
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow } from 'electron'
@@ -11,6 +11,7 @@ import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import {initComponents} from './components/index'
 import AppUpdater from './autoUpdater'
+import icon from '../../resources/icon.png?asset'
 
 function createWindow(): void {
   // Create the browser window.
@@ -20,7 +21,7 @@ function createWindow(): void {
     show: true,
     autoHideMenuBar: true,
     useContentSize: true,
-    icon:path.join(__dirname, '../../public/icon.png'),
+    icon: icon,
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       sandbox: false,
