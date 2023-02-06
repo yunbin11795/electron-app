@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 09:44:41
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-03 16:57:26
+ * @LastEditTime: 2023-02-06 10:54:28
  * @FilePath: \electron-app\src\renderer\src\views\user\index.vue
 -->
 <template>
@@ -38,13 +38,13 @@ import { Login } from '@renderer/api/user'
 const labelPosition = ref('right')
 const router = useRouter();
 const formLabelAlign = reactive({
-  email: 'test',
-  password: '123456',
+  email: 'J@163.com',
+  password: '123456789',
 })
 
 const login = ()=>{
   Login(formLabelAlign).then((res:any) =>{
-    if (!res.errcode) {
+    if (!res.errorCode) {
       router.push({ name: 'Dashboard' })
     }
   })
