@@ -11,6 +11,10 @@
     "disabledAccount": "您的账号已被停用，请联系相关管理员",
     "deletedAccount": "您的账号已被删除，请联系相关管理员",
     "nonexistentAccount": "账号不存在，请确认后重新登录或注册账号",
-    "systemAbnormal": "系统异常，请稍后再试"
+    "systemAbnormal": "系统异常，请稍后再试",
+    "requestTimeout": "您当前网络可能不稳定，请稍后再试",
+    "networkError": "您当前网络可能不稳定，请稍后再试",
+    "403": "您当前网络环境异常，请刷新页面通过人机验证或更换网络代理",
+    "502": "您当前网络可能不稳定，请稍后再试"
   }
 }

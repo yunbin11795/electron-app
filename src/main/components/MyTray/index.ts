@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-23 14:25:33
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-03 11:01:00
+ * @LastEditTime: 2023-02-07 11:59:24
  * @FilePath: \electron-app\src\main\components\MyTray\index.ts
  */
 import { Menu, Tray, ipcMain ,nativeImage ,app , ipcRenderer} from 'electron'
@@ -32,20 +32,14 @@ export default class MyTray{
 
     init():void {
       const contextMenu = Menu.buildFromTemplate([
-        { label: 'Item1', type: 'normal' },
-        { label: 'Item2', type: 'separator' },
-        { label: 'Item3', type: 'checkbox', checked: true },
-        { label: 'close', type: 'normal' ,click: ()=>{
+        { label: '退出', type: 'normal' ,click: ()=>{
           app.exit()
         } }
       ])
 
-      this.tray.setToolTip('This is my application.')
-      this.tray.setContextMenu(contextMenu)
-    
+      this.tray.setToolTip('推广应用')
       // 载入托盘菜单
       this.tray.setContextMenu(contextMenu);
-
     }
 
     handleEvent():void {

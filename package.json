@@ -39,6 +39,7 @@
     "element-plus": "^2.2.22",
     "eslint": "^8.31.0",
     "eslint-plugin-vue": "^9.8.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.30",
     "push.js": "^1.0.12",
     "sass": "^1.56.1",

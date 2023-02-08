@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2022-11-25 16:56:40
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-30 11:20:29
+ * @LastEditTime: 2023-02-07 11:09:30
  * @FilePath: \electron-app\src\renderer\src\views\dashboard\index.vue
 -->
 <template>
@@ -27,10 +27,12 @@
  import MessageList from "./components/MessageList.vue"
  import { ref } from 'vue'
  import { Close } from '@element-plus/icons-vue'
+ import { GetNotifyList } from '@renderer/api/dashboard'
  
  let list:any = ref([])
  const handleAdd = (item)=>{
     list.value.push(item)
+    handleTest()
  }
  const handClickTab = (item)=>{
    window.ipcRenderer.clickBrowserView(item.id)
@@ -39,6 +41,16 @@
  const handleClose = (item)=>{
   window.ipcRenderer.delBrowserView(item.id)
   list.value = list.value.filter( o => o.id !== item.id)
+ }
+
+ const handleTest = () =>{
+  const param = {
+    page: 1,
+    per_page: 10
+  }
+  GetNotifyList(param).then(res =>{
+    console.log(res)
+  })
  }
 
 </script>

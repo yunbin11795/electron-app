@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2023-02-03 14:23:53
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-06 10:32:31
+ * @LastEditTime: 2023-02-07 11:48:33
  * @FilePath: \electron-app\src\renderer\src\utils\request.ts
  */
 import axios from 'axios'
@@ -19,8 +19,10 @@ import {
   ERROR_DELETED_ACCOUNT,
   ERROR_NONEXISTENT_ACCOUNT
 } from '@renderer/conf/error'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import router from  '@renderer/router'
+import { throttle } from 'lodash'
+
 
 const request = axios.create({
   baseURL: '/',
@@ -70,6 +72,18 @@ const showErrorMessage = (errorCode,errMsg)=>{
   }
 }
 
+/**
+ * 通知
+ * 节流，避免一次性出现过多异常通知而引起用户恐慌
+ * @param {string} title    标题
+ * @param {string} message  说明文字
+ * @param {string} type     主题样式（success/warning/info/error）
+ * @param {number} duration 显示时间, 毫秒。设为 0 则不会自动关闭
+ */
+const notify = throttle(function({ title, message, type, duration }) {
+  ElNotification({ title, message, type, duration })
+}, 5000)
+
 // request interceptor
 request.interceptors.request.use(
   (config) => {
@@ -79,6 +93,7 @@ request.interceptors.request.use(
     if(store.token){
       config.headers['token'] = store.token
     }
+    config.headers['language'] = i18n.global.locale.value
     return config
   },
   error => {
@@ -106,8 +121,35 @@ request.interceptors.response.use(
     }
   },
   error => {
-    // do something with request error
-    console.log(error) // for debug
+    // const config = error.config || {}
+    const request = error.request || {}
+    const isCancel = axios.isCancel(error)
+    const isTimeout = /^timeout of \d+ms exceeded$/.test(error.message)
+    const isNetworkError = error.message === 'Network Error'
+    const requestStatus = request.status
+    let errorMessage = error.message
+    const messageType = isCancel ? 'info' : 'error'
+    if (!isCancel) {
+      // “取消”在上面有更详细输出，[Request Cancel]
+      console.dir(error) // for debug
+    }
+    if (isTimeout) {
+      errorMessage = i18n.global.t('message.requestTimeout')
+    } else if (isNetworkError) {
+      errorMessage = i18n.global.t('message.networkError')
+    } else if (requestStatus === 502) {
+      errorMessage = i18n.global.t('message.502')
+    } else if (requestStatus === 403) {
+      errorMessage = i18n.global.t('message.403')
+    }
+    if (errorMessage) {
+      notify({
+        title: errorMessage,
+        // message: config.url,
+        type: messageType,
+        duration: 5 * 1000
+      })
+    }
     return Promise.reject(error)
   }
 )

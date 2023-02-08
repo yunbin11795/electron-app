@@ -3,7 +3,7 @@
  * @Author: Chen YunBin
  * @Date: 2023-01-29 09:44:41
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-06 10:54:28
+ * @LastEditTime: 2023-02-07 10:52:01
  * @FilePath: \electron-app\src\renderer\src\views\user\index.vue
 -->
 <template>
@@ -33,10 +33,11 @@ import LangSelect from '@renderer/components/LangSelect/index.vue'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { Login } from '@renderer/api/user'
-
+import { userStore } from '@renderer/store/user'
 
 const labelPosition = ref('right')
 const router = useRouter();
+const store = userStore()
 const formLabelAlign = reactive({
   email: 'J@163.com',
   password: '123456789',
@@ -45,6 +46,7 @@ const formLabelAlign = reactive({
 const login = ()=>{
   Login(formLabelAlign).then((res:any) =>{
     if (!res.errorCode) {
+      store.setUser(res.data)
       router.push({ name: 'Dashboard' })
     }
   })

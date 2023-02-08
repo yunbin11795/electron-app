@@ -4,5 +4,17 @@
   "login": {
     "password": "password",
     "account": "account"
+  },
+  "message": {
+    "403": "Your current network environment is abnormal, please refresh the page to pass human-machine verification or replace the network agent",
+    "502": "Your current network may be unstable, please try again later",
+    "expiredAccount": "Login expired, please log in again",
+    "otherClientLoggedIn": "The account is logged in elsewhere, please log in again",
+    "disabledAccount": "Your account has been disabled, please contact the relevant administrator",
+    "deletedAccount": "Your account has been deleted, please contact the relevant administrator",
+    "nonexistentAccount": "The account does not exist, please log in or register an account after confirmation",
+    "systemAbnormal": "System exception, please try again later",
+    "requestTimeout": "Your current network may be unstable, please try again later",
+    "networkError": "Your current network may be unstable, please try again later"
   }
 }
