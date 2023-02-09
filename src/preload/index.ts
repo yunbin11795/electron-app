@@ -1,19 +1,17 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-01-29 12:07:39
+ * @LastEditTime: 2023-02-09 14:50:40
  * @FilePath: \electron-app\src\preload\index.ts
  */
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import ipc  from '../main/components/index'
-
+import ipc from '../main/components/index'
 
 // Custom APIs for renderer
 const api = {}
-
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

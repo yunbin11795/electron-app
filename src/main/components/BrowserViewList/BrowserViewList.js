@@ -6,8 +6,8 @@
  * @LastEditTime: 2023-02-03 11:05:39
  * @FilePath: \electron-app\src\main\components\BrowserViewList\BrowserViewList.js
  */
-window.onload = function(){
-   setTimeout(function(){
+window.onload = function() {
+   setTimeout(function() {
       console.log(222)
    },1000)
 }

@@ -9,12 +9,12 @@
  */
 
 import Theme, { ThemeIpcRenderer } from './Theme'
-import MyTray,{ MyTrayIpcRenderer } from './MyTray'
-import BrowserViewList, { BrowserViewIpcRenderer }  from './BrowserViewList'
+import MyTray, { MyTrayIpcRenderer } from './MyTray'
+import BrowserViewList, { BrowserViewIpcRenderer } from './BrowserViewList'
 
-export const initComponents = (mainWindow)=>{
+export const initComponents = (mainWindow) => {
   new Theme(mainWindow)
-  new MyTray(mainWindow),
+  new MyTray(mainWindow)
   new BrowserViewList(mainWindow)
 }
 

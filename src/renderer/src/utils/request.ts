@@ -1,9 +1,9 @@
 /*
- * @Description: 
+ * @Description: 请求拦截
  * @Author: Chen YunBin
  * @Date: 2023-02-03 14:23:53
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-07 11:48:33
+ * @LastEditTime: 2023-02-09 14:32:29
  * @FilePath: \electron-app\src\renderer\src\utils\request.ts
  */
 import axios from 'axios'
@@ -20,18 +20,15 @@ import {
   ERROR_NONEXISTENT_ACCOUNT
 } from '@renderer/conf/error'
 import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
-import router from  '@renderer/router'
+import router from '@renderer/router'
 import { throttle } from 'lodash'
-
 
 const request = axios.create({
   baseURL: '/',
   timeout: 30 * 1000 // request timeout
 })
 
-
-const showErrorMessage = (errorCode,errMsg)=>{
-  
+const showErrorMessage = (errorCode, errMsg) => {
   if ([
     ERROR_EXPIRED_TOKEN,
     ERROR_ILLEGAL_TOKEN,
@@ -61,8 +58,7 @@ const showErrorMessage = (errorCode,errMsg)=>{
     }).then(() => {
       router.push({ name: 'Login' })
     })
-    
-  }else if (errorCode === ERROR_GENERAL || errorCode === ERROR_INCORRECT_USERNAME_OR_PASSWORD ){
+  } else if (errorCode === ERROR_GENERAL || errorCode === ERROR_INCORRECT_USERNAME_OR_PASSWORD) {
     const defaultErrorMessage = i18n.global.t('message.systemAbnormal')
     ElMessage({
       message: errMsg || defaultErrorMessage,
@@ -90,7 +86,7 @@ request.interceptors.request.use(
     // set default custom config
     // config.customConfig = config.customConfig || {}
     const store = userStore()
-    if(store.token){
+    if (store.token) {
       config.headers['token'] = store.token
     }
     config.headers['language'] = i18n.global.locale.value
@@ -108,12 +104,12 @@ request.interceptors.response.use(
   response => {
     const res = response.data
     let errorCode = res.code
-    let errMsg = res.msg
+    const errMsg = res.msg
     if (errorCode === 200) {
       // 成功状态码统一为0
       errorCode = 0
     }
-    showErrorMessage(errorCode,errMsg)
+    showErrorMessage(errorCode, errMsg)
 
     return {
       errorCode,
@@ -153,7 +149,5 @@ request.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-
 
 export default request

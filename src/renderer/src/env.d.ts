@@ -1,11 +1,12 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-03 14:59:48
+ * @LastEditTime: 2023-02-09 12:23:04
  * @FilePath: \electron-app\src\renderer\src\env.d.ts
  */
+
 /// <reference types="vite/client" />
 
 declare module '*.vue' {
@@ -14,6 +15,3 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-
-
-

@@ -13,7 +13,7 @@
         <Setting />
       </el-icon>
     </span>
-    <template #dropdown >
+    <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item :disabled="language==='zh-CN'" command="zh-CN">
           {{ $t('chinese') }}
@@ -27,21 +27,19 @@
 </template>
 
 <script setup lang="ts">
- import { Setting } from '@element-plus/icons-vue'
- import { useI18n } from 'vue-i18n'
- import { storeToRefs } from 'pinia'
- import { userStore } from '@renderer/store/user'
+import { Setting } from '@element-plus/icons-vue'
+import { useI18n } from 'vue-i18n'
+import { storeToRefs } from 'pinia'
+import { userStore } from '@renderer/store/user'
 
+const store = userStore()
+const { language } = storeToRefs(store)
+const { locale } = useI18n()
 
- const store = userStore()
- const {language} = storeToRefs(store)
- const { locale } = useI18n()
-
-
- const handleSetLanguage =(lang)=>{
-    store.setLanguage(lang)
-    locale.value = lang
- }
+const handleSetLanguage = (lang) => {
+  store.setLanguage(lang)
+  locale.value = lang
+}
 
 </script>
 

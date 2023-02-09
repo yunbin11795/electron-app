@@ -1,15 +1,15 @@
 /*
- * @Description: 
+ * @Description: 主进程
  * @Author: Chen YunBin
  * @Date: 2022-11-21 09:40:30
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-03 10:26:59
+ * @LastEditTime: 2023-02-09 14:52:32
  * @FilePath: \electron-app\src\main\index.ts
  */
 import { app, shell, BrowserWindow } from 'electron'
 import * as path from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import {initComponents} from './components/index'
+import { initComponents } from './components/index'
 import AppUpdater from './autoUpdater'
 import icon from '../../resources/icon.png?asset'
 
@@ -24,7 +24,7 @@ function createWindow(): void {
     icon: icon,
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
-      sandbox: false,
+      sandbox: false
     }
   })
 
@@ -33,12 +33,11 @@ function createWindow(): void {
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
-  
+
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
   })
-
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
@@ -50,12 +49,11 @@ function createWindow(): void {
 
   mainWindow.on('close', (event) => {
     // 截获 close 默认行为
-    event.preventDefault();
+    event.preventDefault()
     // 点击关闭时触发close事件，我们按照之前的思路在关闭时，隐藏窗口，隐藏任务栏窗口
-    mainWindow.hide();
-    mainWindow.setSkipTaskbar(true);
-
-  });
+    mainWindow.hide()
+    mainWindow.setSkipTaskbar(true)
+  })
   // mainWindow.webContents.openDevTools()
 }
 // This method will be called when Electron has finished
@@ -73,8 +71,7 @@ app.whenReady().then(() => {
   })
 
   createWindow()
-  
-  app.on('activate', function () {
+  app.on('activate', function() {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()

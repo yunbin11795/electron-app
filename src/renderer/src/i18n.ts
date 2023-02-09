@@ -1,5 +1,5 @@
 /*
- * @Description: 
+ * @Description: 国际化
  * @Author: Chen YunBin
  * @Date: 2023-02-02 10:33:11
  * @LastEditors: Chen YunBin
@@ -8,11 +8,10 @@
  */
 import { createI18n } from 'vue-i18n'
 
-
 function loadLocaleMessages() {
   const locales = import.meta.glob('./locales/*.json', { eager: true })
   const messages = {}
-  for (const [key,value] of Object.entries(locales)) {
+  for (const [key, value] of Object.entries(locales)) {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i)
     if (matched && matched.length > 1) {
       const locale = matched[1]
@@ -43,9 +42,9 @@ export function getLanguage() {
 const i18n = createI18n({
   legacy: false, // you must set `false`, to use Composition API
   locale: getLanguage(),
-  globalInjection:true, // 全域注入，让你在 <template> 可以使用 $t
+  globalInjection: true, // 全域注入，让你在 <template> 可以使用 $t
   messages,
-  fallbackLocale: 'en', // 设置备用语言
+  fallbackLocale: 'en' // 设置备用语言
 })
 
 export default i18n
