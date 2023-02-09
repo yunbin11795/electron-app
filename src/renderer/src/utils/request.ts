@@ -3,10 +3,11 @@
  * @Author: Chen YunBin
  * @Date: 2023-02-03 14:23:53
  * @LastEditors: Chen YunBin
- * @LastEditTime: 2023-02-09 14:32:29
+ * @LastEditTime: 2023-02-09 16:42:02
  * @FilePath: \electron-app\src\renderer\src\utils\request.ts
  */
 import axios from 'axios'
+import { MyAxiosInstance, MyInternalAxiosRequestConfig } from './index'
 import { userStore } from '@renderer/store/user'
 import i18n from '@renderer/i18n'
 import {
@@ -23,7 +24,7 @@ import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 import router from '@renderer/router'
 import { throttle } from 'lodash'
 
-const request = axios.create({
+const request:MyAxiosInstance = axios.create({
   baseURL: '/',
   timeout: 30 * 1000 // request timeout
 })
@@ -80,16 +81,46 @@ const notify = throttle(function({ title, message, type, duration }) {
   ElNotification({ title, message, type, duration })
 }, 5000)
 
+// request cancel
+const pendingRequests:any = []
+const removePendingRequest = (config, type) => {
+  const { url, method } = config
+  const { reqKey, silentCancel, cancelMessage } = config.customConfig
+  const index = pendingRequests.findIndex(item => {
+    const sameUrl = url === item.config.url
+    const sameMethod = method === item.config.method
+    const sameReqKey = reqKey === item.config.customConfig.reqKey
+    return sameUrl && sameMethod && sameReqKey
+  })
+  if (index > -1) {
+    if (type === 'request') {
+      pendingRequests[index].cancel(silentCancel ? '' : cancelMessage)
+      console.log('[Request Cancel]', pendingRequests[index]) // for debug
+    }
+    pendingRequests.splice(index, 1)
+  }
+}
+
 // request interceptor
 request.interceptors.request.use(
-  (config) => {
+  (config: MyInternalAxiosRequestConfig) => {
     // set default custom config
-    // config.customConfig = config.customConfig || {}
+    config.customConfig = config.customConfig || {}
     const store = userStore()
     if (store.token) {
       config.headers['token'] = store.token
     }
     config.headers['language'] = i18n.global.locale.value
+
+    if (!config.customConfig.notCancel) {
+      removePendingRequest(config, 'request')
+      config.cancelToken = new axios.CancelToken(cancel => {
+        pendingRequests.push({
+          config,
+          cancel
+        })
+      })
+    }
     return config
   },
   error => {
